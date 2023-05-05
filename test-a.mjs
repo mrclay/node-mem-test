@@ -3,7 +3,7 @@ import { report } from './common.mjs';
 (async function test() {
   await new Promise(res => setTimeout(res, 2e3));
 
-  const { data } = await import('./module-a.mjs');
+  const { data } = await import('./build/module-a.mjs');
   report('a', 'loaded');
 
   console.log(data.states.features.length);

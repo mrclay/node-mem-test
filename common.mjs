@@ -13,5 +13,5 @@ export function report(test, name) {
     ...Object.keys(now).map(key => (now[key] - baseline[key]) / 1024),
   ];
 
-  appendFileSync('report.csv', values.join(',') + '\n' );
+  appendFileSync('build/report.csv', values.join(',') + '\n' );
 }

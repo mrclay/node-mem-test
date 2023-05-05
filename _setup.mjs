@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { memoryUsage } from 'node:process';
 
 const headers = [
@@ -6,7 +6,8 @@ const headers = [
   'report-name',
   ...Object.keys(memoryUsage()),
 ];
-writeFileSync('report.csv', headers.join(',') + '\n');
+mkdirSync('build', { recursive: true });
+writeFileSync('build/report.csv', headers.join(',') + '\n');
 
 const countries = JSON.parse(readFileSync('countries.json').toString());
 const states = JSON.parse(readFileSync('states.json').toString());
@@ -23,6 +24,6 @@ const data = {
 
 const json = JSON.stringify(data);
 
-writeFileSync('module-a.mjs', `export const data = ${json};`);
-writeFileSync('module-b.mjs', `export function getData() { return ${json}; }`);
-writeFileSync('module-c.mjs', `export function getData() { return JSON.parse(${JSON.stringify(json)}); }`);
+writeFileSync('build/module-a.mjs', `export const data = ${json};`);
+writeFileSync('build/module-b.mjs', `export function getData() { return ${json}; }`);
+writeFileSync('build/module-c.mjs', `export function getData() { return JSON.parse(${JSON.stringify(json)}); }`);
